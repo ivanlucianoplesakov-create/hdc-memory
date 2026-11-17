@@ -12,6 +12,7 @@ small{color:#999}</style></head><body>
 <script>
 const U="https://vrcddtbmyjbokcbugmly.supabase.co/functions/v1/memory-log";
 const t=document.getElementById('t'),o=document.getElementById('out');
+if(location.hash.startsWith('#k=')){localStorage.setItem('mk',decodeURIComponent(location.hash.slice(3)));history.replaceState(null,'',location.pathname);}
 function key(){let k=localStorage.getItem('mk');if(!k){k=prompt('Paste your secret key (one time)');if(k)localStorage.setItem('mk',k.trim());}return k;}
 async function go(mode){const text=t.value.trim();if(!text)return;const k=key();if(!k)return;o.textContent='...';
 try{const r=await fetch(U,{method:'POST',headers:{'x-api-key':k,'Content-Type':'application/json'},body:JSON.stringify({text,mode})});
